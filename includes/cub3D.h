@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/29 17:05:06 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/11/30 11:23:21 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_info
 	void	*mlx;
 	void	*win;
 	char	**map;
-	void	*texture_paths[4];
+	void	*wall_imgs[4];
 	int		texture_width[4];
 	int		texture_height[4];
 	int		color_floor;
@@ -56,5 +56,7 @@ int		check_map(char **map);
 int		parse_map(t_info *info, char *file, size_t *offset);
 char	*read_file(char *map_path);
 void	free_map(char **map);
+void	destroy_info(t_info *info);
+int		parse_element(t_info *info, char *file, size_t *offset, int type);
 int		parse_element(t_info *info, char *file, size_t *offset, int type);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 13:39:21 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/28 10:08:19 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/11/30 11:28:34 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	len_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])

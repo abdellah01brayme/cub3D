@@ -7,7 +7,8 @@ LIB_DIR = libft
 
 LIBFT = $(LIB_DIR)/libft.a
 
-SRC = 	parser/check_map.c  parser/parser.c  parser/read_file.c  parser/parse_map.c\
+SRC = 	parser/check_map.c  parser/parser.c  parser/read_file.c  parser/parse_map.c parser/parse_elements.c\
+		tool/destroy.c tool/print_errors.c \
 		src/main.c
 
 DIR = ./minilibx-linux

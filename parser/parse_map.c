@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                         :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 11:16:43 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/12 13:40:54 by aid-bray         ###   ########.fr       */
+/*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
+/*   Updated: 2025/11/30 11:30:49 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (!map)
-		return ;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
 
 static int	first_check_map(char *s, size_t *offset)
 {
@@ -58,13 +43,13 @@ static int	is_inserted(t_info *info)
 		return (print_error2("Element not inserted: ", "CEIL"));
 	if (info->color_floor < 0)
 		return (print_error2("Element not inserted: ", "FLOOR"));
-	if (!info->texture_paths[NORTH])
+	if (!info->wall_imgs[NORTH])
 		return (print_error2("Element not inserted: ", "NORTH"));
-	if (!info->texture_paths[SOUTH])
+	if (!info->wall_imgs[SOUTH])
 		return (print_error2("Element not inserted: ", "SOUTH"));
-	if (!info->texture_paths[EAST])
+	if (!info->wall_imgs[EAST])
 		return (print_error2("Element not inserted: ", "EAST"));
-	if (!info->texture_paths[WEST])
+	if (!info->wall_imgs[WEST])
 		return (print_error2("Element not inserted: ", "WEST"));
 	return (0);
 }
