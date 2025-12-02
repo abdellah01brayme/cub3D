@@ -6,11 +6,11 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:21:43 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/30 11:30:16 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/01 18:43:33 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../include/cub3D.h"
 
 static int	get_rgb_number(char *file, size_t *offset)
 {
@@ -72,9 +72,9 @@ static int	parse_texture(t_info *info, char *file, size_t *offset, int type)
 		(*offset)++;
 	file[*offset] = '\0';
 	(*offset)++;
-	img = mlx_xpm_file_to_image(info->mlx, texture, &info->texture_width[type],
-			&info->texture_height[type]);
-	if (!img) // && info->texture_width[type] != 0 if the texture is empty
+	img = mlx_xpm_file_to_image(info->mlx, texture, &info->wall_width[type],
+			&info->wall_height[type]);
+	if (!img) // && info->wall_width[type] != 0 if the texture is empty
 		return (print_error2("Invalide texture: ", texture - 3));
 	info->wall_imgs[type] = img;
 	return (0);

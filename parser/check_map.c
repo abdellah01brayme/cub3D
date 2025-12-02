@@ -6,11 +6,11 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 13:39:21 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/30 11:28:34 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/01 18:42:22 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../include/cub3D.h"
 
 static int	len_map(char **map)
 {
@@ -39,7 +39,7 @@ static int	check_closed(char *line)
 	return (0);
 }
 
-static int	check_round(char **map, int i, int j, int len_line)
+static int	check_round(char **map, int i, int j)
 {
 	int	len_befor;
 	int	len_after;
@@ -59,7 +59,7 @@ static int	check_round(char **map, int i, int j, int len_line)
 	return (0);
 }
 
-static int	check_line(char **map, int i, int size_map, int len_line)
+static int	check_line(char **map, int i)
 {
 	int	j;
 
@@ -70,9 +70,9 @@ static int	check_line(char **map, int i, int size_map, int len_line)
 	{
 		if (map[i][j] == '0' && !map[i][j + 1])
 			return (1);
-		if (map[i][j] == '0' && check_round(map, i, j, len_line))
+		if (map[i][j] == '0' && check_round(map, i, j))
 			return (1);
-		if (ft_strchr("WESN", map[i][j]) && check_round(map, i, j, len_line))
+		if (ft_strchr("WESN", map[i][j]) && check_round(map, i, j))
 			return (1);
 		j++;
 	}
@@ -83,7 +83,6 @@ int	check_map(char **map)
 {
 	int	size;
 	int	i;
-	int	len;
 
 	i = 1;
 	size = len_map(map);
@@ -91,8 +90,7 @@ int	check_map(char **map)
 		return (1);
 	while (map[i + 1])
 	{
-		len = ft_strlen(map[i]);
-		if (check_line(map, i, size, len))
+		if (check_line(map, i))
 			return (print_error2("Invalid MAP: unclosed line: ", map[i]));
 		i++;
 	}

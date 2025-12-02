@@ -6,11 +6,11 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:36:24 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/25 12:57:04 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/01 18:42:22 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../include/cub3D.h"
 #define SIZE_BUFFER 50
 
 

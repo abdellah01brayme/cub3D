@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/30 11:23:21 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:14:00 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,37 @@ typedef enum s_num
 	NEW_LINE
 }	t_num;
 
+typedef struct	s_params_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		byts_per_pexel;
+	int		line_length;
+	int		endian;
+}				t_params_img;
+
+typedef struct s_player
+{
+	int	x_position;
+	int	y_position;
+	int	x_direction;
+	int	y_direction;
+}		t_player;
+
 typedef struct s_info
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	void	*wall_imgs[4];
-	int		texture_width[4];
-	int		texture_height[4];
-	int		color_floor;
-	int		color_ceil;
-}			t_info;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		**map;
+	t_player	player;
+	void		*wall_imgs[4];
+	int			wall_width[4];
+	int			wall_height[4];
+	int			color_floor;
+	int			color_ceil;
+}				t_info;
 
 
 int		parser(t_info *info, char *file);
@@ -59,4 +79,7 @@ void	free_map(char **map);
 void	destroy_info(t_info *info);
 int		parse_element(t_info *info, char *file, size_t *offset, int type);
 int		parse_element(t_info *info, char *file, size_t *offset, int type);
+
+
+int		start_game(t_info *info);
 #endif

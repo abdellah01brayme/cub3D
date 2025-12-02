@@ -6,11 +6,11 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 18:28:34 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/11/30 11:32:37 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:19:30 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../include/cub3D.h"
 
 int	init_info(t_info *info)
 {
@@ -34,8 +34,17 @@ int	main(int ac, char **av)
 		return (1);
 	file = read_file(av[1]);
 	if (parser(&info, file))
-		return (free(file), destroy_info(&info), 1);
+	{
+		free(file);
+		destroy_info(&info);
+		return (1);
+	}
 	free(file);
+	if (start_game(&info))
+	{
+		destroy_info(&info);
+		return (1);
+	}
 	destroy_info(&info);
 	return (0);
 }

@@ -9,12 +9,15 @@ LIBFT = $(LIB_DIR)/libft.a
 
 SRC = 	parser/check_map.c  parser/parser.c  parser/read_file.c  parser/parse_map.c parser/parse_elements.c\
 		tool/destroy.c tool/print_errors.c \
+		start_game/start_game.c\
 		src/main.c
 
 DIR = ./minilibx-linux
 
 OBJ = $(SRC:%.c=%.o)
 
+# %.o: %.c
+# 	$(CC) $(FLAGS) -c $< -o $@
 all : $(NAME)
 
 $(LIBFT):
