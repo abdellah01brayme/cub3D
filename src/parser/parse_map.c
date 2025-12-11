@@ -6,11 +6,11 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/01 18:42:22 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/11 13:52:55 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 static int	first_check_map(char *s, size_t *offset)
 {
@@ -27,7 +27,7 @@ static int	first_check_map(char *s, size_t *offset)
 			return (print_error3("Invalid MAP charater in this line: ", line, "\n"));
 		if (ft_strchr("NSWE", s[*offset]))
 			count++;
-		if (s[*offset - 1] == '\n'&& s[*offset] == '\n' && s[*offset + 1]
+		if (s[*offset - 1] == '\n' && s[*offset] == '\n' && s[*offset + 1]
 			&& s[*offset + 1] != '\n')
 			return (print_error2("Invalid MAP: ", "empty line in the map"));
 		(*offset)++;
@@ -53,6 +53,55 @@ static int	is_inserted(t_info *info)
 		return (print_error2("Element not inserted: ", "WEST"));
 	return (0);
 }
+static void	set_player(t_info *info, int y, int x)
+{
+	info->player.x_pos = x * GRID_WIDTH + GRID_WIDTH / 2;
+	info->player.y_pos = y * GRID_HIEGHT + GRID_HIEGHT / 2;
+	info->player.x_step = 0;
+	info->player.y_step = 0;
+	if (info->map[y][x] == 'N')
+	{
+		info->player.y_step = -1;
+		info->player.angle = 3 * M_PI / 2;
+	}
+	else if (info->map[y][x] == 'E')
+	{
+		info->player.x_step = 1;
+		info->player.angle = 0;
+	}
+	else if (info->map[y][x] == 'S')
+	{
+		info->player.y_step = 1;
+		info->player.angle = M_PI / 2;
+	}
+	else
+	{
+		info->player.x_step = -1;
+		info->player.angle = M_PI;
+	}
+}
+
+static void	find_player(t_info *info)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (info->map[y])
+	{
+		x = 0;
+		while (info->map[y][x])
+		{
+			if (ft_strchr("NSWE", info->map[y][x]))
+			{
+				set_player(info, y, x);
+				break ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
 int	parse_map(t_info *info, char *file, size_t *offset)
 {
@@ -68,5 +117,6 @@ int	parse_map(t_info *info, char *file, size_t *offset)
 		return (print_error(strerror(errno)));
 	if (check_map(info->map))
 		return (1);
+	find_player(info);
 	return (0);
 }

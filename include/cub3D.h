@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/02 17:14:00 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/11 14:34:44 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <math.h>
 
-
+# define VERTICAL 1
+# define HORIZONTAL 0
+# define WIN_WIDTH 800
+# define WIN_HIEGHT 800
+# define GRID_WIDTH 60
+# define GRID_HIEGHT 60
+# define FOV (2 * M_PI / 2)
 #include <stdio.h>
 typedef enum s_num
 {
@@ -35,29 +42,44 @@ typedef enum s_num
 	NEW_LINE
 }	t_num;
 
-typedef struct	s_params_img
+typedef struct	s_img
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
-	int		byts_per_pexel;
+	int		byts_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_params_img;
+}				t_img;
 
 typedef struct s_player
 {
-	int	x_position;
-	int	y_position;
-	int	x_direction;
-	int	y_direction;
-}		t_player;
+	double	x_pos;
+	double	y_pos;
+	double	angle;
+	int		y_step;
+	int		x_step;
+}			t_player;
+
+typedef struct s_dda
+{
+	double	x_pos;
+	double	y_pos;
+	double	h_to_h;
+	double	v_to_v;
+	double	h_dist;
+	double	v_dist;
+	int		x_step;
+	int		y_step;
+	double	angle;
+	int		hit_wall;
+}			t_dda;
 
 typedef struct s_info
 {
 	void		*mlx;
 	void		*win;
-	void		*img;
+	t_img		*img;
 	char		**map;
 	t_player	player;
 	void		*wall_imgs[4];
@@ -82,4 +104,6 @@ int		parse_element(t_info *info, char *file, size_t *offset, int type);
 
 
 int		start_game(t_info *info);
+void 	draw_img(t_info *info);
+int		len_map(char **map);
 #endif

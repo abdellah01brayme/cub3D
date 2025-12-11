@@ -6,11 +6,11 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:19:08 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/01 18:42:22 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:03:09 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 int	print_error(char *msg1)
 {
