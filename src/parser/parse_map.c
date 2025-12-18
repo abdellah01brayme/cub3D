@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/11 13:52:55 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:34:09 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static int	first_check_map(char *s, size_t *offset)
 		if (s[*offset] == '\n')
 			line = s + *offset + 1;
 		if (!ft_strchr(" 01\nNSWE", s[*offset]))
-			return (print_error3("Invalid MAP charater in this line: ", line, "\n"));
+		{
+			print_error3("Invalid MAP charater in this line: ", line, "\n");
+			return (-1);
+		}
 		if (ft_strchr("NSWE", s[*offset]))
 			count++;
 		if (s[*offset - 1] == '\n' && s[*offset] == '\n' && s[*offset + 1]
@@ -53,6 +56,7 @@ static int	is_inserted(t_info *info)
 		return (print_error2("Element not inserted: ", "WEST"));
 	return (0);
 }
+
 static void	set_player(t_info *info, int y, int x)
 {
 	info->player.x_pos = x * GRID_WIDTH + GRID_WIDTH / 2;
@@ -62,7 +66,7 @@ static void	set_player(t_info *info, int y, int x)
 	if (info->map[y][x] == 'N')
 	{
 		info->player.y_step = -1;
-		info->player.angle = 3 * M_PI / 2;
+		info->player.angle = 3 * PI / 2;
 	}
 	else if (info->map[y][x] == 'E')
 	{
@@ -72,12 +76,12 @@ static void	set_player(t_info *info, int y, int x)
 	else if (info->map[y][x] == 'S')
 	{
 		info->player.y_step = 1;
-		info->player.angle = M_PI / 2;
+		info->player.angle = PI / 2;
 	}
 	else
 	{
 		info->player.x_step = -1;
-		info->player.angle = M_PI;
+		info->player.angle = PI;
 	}
 }
 
@@ -95,6 +99,7 @@ static void	find_player(t_info *info)
 			if (ft_strchr("NSWE", info->map[y][x]))
 			{
 				set_player(info, y, x);
+				info->map[y][x] = '0';
 				break ;
 			}
 			x++;

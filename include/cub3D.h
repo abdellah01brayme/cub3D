@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/11 14:34:44 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/15 10:59:27 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 
 # define VERTICAL 1
 # define HORIZONTAL 0
-# define WIN_WIDTH 800
-# define WIN_HIEGHT 800
+# define WIN_WIDTH 780
+# define WIN_HIEGHT 780
 # define GRID_WIDTH 60
 # define GRID_HIEGHT 60
-# define FOV (2 * M_PI / 2)
+# define STEP 5
+# define ANGLE_UP 0.05
+#define PI 3.14159265358979323846
+# define FOV (PI / 3)
 #include <stdio.h>
 typedef enum s_num
 {
@@ -54,32 +57,34 @@ typedef struct	s_img
 
 typedef struct s_player
 {
-	double	x_pos;
-	double	y_pos;
+	int		x_pos;
+	int		y_pos;
 	double	angle;
 	int		y_step;
 	int		x_step;
 }			t_player;
 
-typedef struct s_dda
+typedef struct s_ray
 {
-	double	x_pos;
-	double	y_pos;
-	double	h_to_h;
-	double	v_to_v;
-	double	h_dist;
-	double	v_dist;
+	int		index;
+	int		x_pos;
+	int		y_pos;
+	int		h_to_h;
+	int		v_to_v;
+	int		h_dist;
+	int		v_dist;
 	int		x_step;
 	int		y_step;
 	double	angle;
 	int		hit_wall;
-}			t_dda;
+}			t_ray;
 
 typedef struct s_info
 {
+	t_ray		ray;
 	void		*mlx;
 	void		*win;
-	t_img		*img;
+	t_img		img;
 	char		**map;
 	t_player	player;
 	void		*wall_imgs[4];
@@ -101,9 +106,12 @@ void	free_map(char **map);
 void	destroy_info(t_info *info);
 int		parse_element(t_info *info, char *file, size_t *offset, int type);
 int		parse_element(t_info *info, char *file, size_t *offset, int type);
+void	set_pixel_color(t_img *param, int y, int x, int color);;
 
 
 int		start_game(t_info *info);
 void 	draw_img(t_info *info);
 int		len_map(char **map);
+int		draw(t_info *info);
+void	init_ray(t_ray *ray, t_info *info, double angle, int index);
 #endif

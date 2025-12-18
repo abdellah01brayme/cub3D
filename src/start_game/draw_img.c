@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:24:07 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/11 14:31:42 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/15 11:01:12 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define COLOR_WALL 0x16173B
 #define COLOR_FLOOR 0x286E26
 #define COLOR_PLAYER 0xFA0A0A
-void	set_pixel_color(t_img *param, int x, int y, int color);
 
 void    draw_grid(t_img *img, int i, int j, int color)
 {
@@ -22,16 +21,30 @@ void    draw_grid(t_img *img, int i, int j, int color)
 	int y;
 
 	x = 0;
-	while (x < GRID_HIEGHT - 1)
+	while (x < GRID_HIEGHT)
 	{
 		y = 0;
-		while (y < GRID_WIDTH - 1)
+		while (y < GRID_WIDTH)
 		{
 			set_pixel_color(img, i + x, j + y, color);
 			y++;
 		}
 		x++;
 	}
+	// y = 0;
+	// while (y < GRID_WIDTH - 1)
+	// {
+	// 	set_pixel_color(img, i + x, j + y, 0);
+	// 	y++;
+	// }
+	// x = 0;
+	// while (x < GRID_HIEGHT)
+	// {
+	// 	set_pixel_color(img, i + x, j + y, 0);
+	// 	x++;
+	// }
+	// x = GRID_HIEGHT - 1;
+
 }
 
 void    draw_player(t_img *img, int i, int j, int color)
@@ -39,11 +52,11 @@ void    draw_player(t_img *img, int i, int j, int color)
 	int	x;
 	int	y;
 
-	x = - 8;
-	while (x < 6)
+	x = - 4;
+	while (x < 4)
 	{
-		y = - 8;
-		while (y < 8)
+		y = - 4;
+		while (y < 4)
 		{
 			set_pixel_color(img, i + x, j + y, color);
 			y++;

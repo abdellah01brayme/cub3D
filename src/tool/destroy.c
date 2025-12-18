@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:17:21 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/03 17:03:09 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:49:28 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	destroy_info(t_info *info)
 	if (info->wall_imgs[EAST])
 		mlx_destroy_image(info->mlx, info->wall_imgs[EAST]);
 	//....
+	if (info->win)
+		mlx_destroy_window(info->mlx, info->win);
+	if (info->img.img)
+		mlx_destroy_image(info->mlx, info->img.img);
 	mlx_destroy_display(info->mlx);
 	free(info->mlx);
 }
