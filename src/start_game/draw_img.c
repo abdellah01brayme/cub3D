@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:24:07 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/15 11:01:12 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 10:49:32 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define COLOR_FLOOR 0x286E26
 #define COLOR_PLAYER 0xFA0A0A
 
-void    draw_grid(t_img *img, int i, int j, int color)
+void    draw_grid(t_textur *img, int i, int j, int color)
 {
 	int x;
 	int y;
@@ -47,7 +47,7 @@ void    draw_grid(t_img *img, int i, int j, int color)
 
 }
 
-void    draw_player(t_img *img, int i, int j, int color)
+void    draw_player(t_textur *img, int i, int j, int color)
 {
 	int	x;
 	int	y;

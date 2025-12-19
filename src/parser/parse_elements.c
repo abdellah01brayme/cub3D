@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:21:43 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/03 17:03:09 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:14:54 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ static int	parse_color(int *color, char *file, size_t *offset)
 	line = file + *offset;
 	if (file[++(*offset)] != ' ')
 		return (print_error3("Invalid RGB format: ", line, "\n"));
-	(*offset)++;
 	i = 0;
 	while (i < 3)
 	{
+		skip_space(file, offset);
 		n[i] = get_rgb_number(file, offset);
 		if (n[i] < 0)
 			return (print_error3("Invalid RGB range: ", line, "\n"));
+		skip_space(file, offset);
 		if (i < 2 && file[*offset] != ',')
 			return (print_error3("Invalid RGB format: ", line, "\n"));
 		if (file[*offset] == ',')
@@ -57,26 +58,30 @@ static int	parse_color(int *color, char *file, size_t *offset)
 
 static int	parse_texture(t_info *info, char *file, size_t *offset, int type)
 {
-	char	*texture;
-	void	*img;
+	t_textur	*textur;
+	char		*path;
+	size_t		i;
 
+	textur = &info->textures[type];
+	path = file + *offset;
 	(*offset) += 2;
 	if (file[*offset] != ' ')
-	{
-		print_error("Invalid texture path");
-		return (-1);
-	}
-	(*offset) += 1;
-	texture = file + *offset;
+		return (print_error3("Invalid texture format: ", path, "\n"));
+	skip_space(file, offset);
+	path = file + *offset;
 	while (file[*offset] && file[*offset] != '\n')
 		(*offset)++;
+	i  = *offset - 1;
+	while (file[i] == ' ')
+		file[i--] = '\0';
 	file[*offset] = '\0';
 	(*offset)++;
-	img = mlx_xpm_file_to_image(info->mlx, texture, &info->wall_width[type],
-			&info->wall_height[type]);
-	if (!img) // && info->wall_width[type] != 0 if the texture is empty
-		return (print_error2("Invalide texture: ", texture - 3));
-	info->wall_imgs[type] = img;
+	textur->img = mlx_xpm_file_to_image(info->mlx, path, &textur->textur_width,
+										&textur->textur_height);
+	if (!textur->img) // && info->wall_width[type] != 0 if the texture is empty
+		return (print_error2("Invalide texture: ", path - 3));
+	textur->addr = mlx_get_data_addr(textur->img, &textur->bits_per_pxl,
+									&textur->length_line, &textur->endian);
 	return (0);
 }
 

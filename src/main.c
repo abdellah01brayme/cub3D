@@ -6,45 +6,30 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 18:28:34 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/03 17:03:22 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 15:35:13 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-int	init_info(t_info *info)
-{
-	ft_memset(info, 0, sizeof(t_info));
-	info->color_ceil = -1;
-	info->color_floor = -1;
-	info->mlx = mlx_init();
-	if (!info->mlx)
-		return (print_error2("mlx: ", "failed to connection with X11"));
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_info	info;
-	char	*file;
 
 	if (ac != 2)
 		return (print_error2("Invalide arguments: ", "./cub3D path_to_file"));
-	if (init_info(&info))
-		return (1);
-	file = read_file(av[1]);
-	if (parser(&info, file))
-	{
-		free(file);
-		destroy_info(&info);
-		return (1);
-	}
-	free(file);
-	if (start_game(&info))
+	initial_info(&info);
+	if (parser(&info, av[1]))
 	{
 		destroy_info(&info);
 		return (1);
 	}
+	if (initial_other(&info) || start_game(&info))
+	{
+		destroy_info(&info);
+		return (1);
+	}
+	
 	destroy_info(&info);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/15 10:59:27 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:07:05 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,6 @@ typedef enum s_num
 	NEW_LINE
 }	t_num;
 
-typedef struct	s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		byts_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_img;
-
 typedef struct s_player
 {
 	int		x_pos;
@@ -79,17 +69,29 @@ typedef struct s_ray
 	int		hit_wall;
 }			t_ray;
 
+typedef struct s_textur
+{
+	void	*img;
+	char	*addr;
+	int		textur_width;
+	int		textur_height;
+	int		bits_per_pxl;
+	int		length_line;
+	int		endian;
+}			t_textur;
+
 typedef struct s_info
 {
-	t_ray		ray;
 	void		*mlx;
 	void		*win;
-	t_img		img;
 	char		**map;
+	t_ray		ray;
 	t_player	player;
-	void		*wall_imgs[4];
-	int			wall_width[4];
-	int			wall_height[4];
+	// void		*wall_imgs[4];
+	// int			wall_width[4];
+	// int			wall_height[4];
+	t_textur	img;
+	t_textur	textures[4];
 	int			color_floor;
 	int			color_ceil;
 }				t_info;
@@ -106,7 +108,9 @@ void	free_map(char **map);
 void	destroy_info(t_info *info);
 int		parse_element(t_info *info, char *file, size_t *offset, int type);
 int		parse_element(t_info *info, char *file, size_t *offset, int type);
-void	set_pixel_color(t_img *param, int y, int x, int color);;
+void	set_pixel_color(t_textur *param, int y, int x, int color);
+int		initial_info(t_info *info);
+int		initial_other(t_info *info);
 
 
 int		start_game(t_info *info);
@@ -114,4 +118,6 @@ void 	draw_img(t_info *info);
 int		len_map(char **map);
 int		draw(t_info *info);
 void	init_ray(t_ray *ray, t_info *info, double angle, int index);
+int		handle_key(int key, t_info *info);
+void	skip_space(char *str, size_t *offset);
 #endif

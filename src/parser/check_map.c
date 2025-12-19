@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 13:39:21 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/11 11:56:10 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:32:18 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	check_map(char **map)
 	while (map[i + 1])
 	{
 		if (check_line(map, i))
-			return (print_error2("Invalid MAP: unclosed line: ", map[i]));
+			return (print_error2("Invalid MAP: unprotected line: ", map[i]));
 		i++;
 	}
 	return (0);

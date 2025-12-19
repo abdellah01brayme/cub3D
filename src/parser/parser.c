@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:29:01 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/03 17:03:09 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/18 13:57:03 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ static int	get_type(char *s, size_t i)
 	return (-1);
 }
 
-int	parser(t_info *info, char *file)
+int	parser(t_info *info, char *file_name)
 {
 	size_t	offset;
 	int		type;
+	char 	*file;
 
+	file = read_file(file_name);
 	offset = 0;
 	while (file[offset])
 	{
@@ -46,12 +48,14 @@ int	parser(t_info *info, char *file)
 			++offset;
 		else if (type < 0)
 		{
+			free(file);
 			print_error3("unacceptable element: ", file + offset, "\n");
 			return (1);
 		}
 		else if (parse_element(info, file, &offset, type))
-			return (1);
+			return (free(file), 1);
 	}
+	free(file);
 	if (!info->map)
 		return (print_error2("Element not inserted: ", "MAP"));
 	return (0);

@@ -6,74 +6,19 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:35:47 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/15 12:15:45 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:00:52 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void	set_pixel_color(t_img *img, int y, int x, int color)
+void	set_pixel_color(t_textur *img, int y, int x, int color)
 {
 	char	*pixel;
 
-	pixel = img->addr + y * img->line_length + x * img->byts_per_pixel;
+	pixel = img->addr + y * img->length_line + x * img->bits_per_pxl / 8;
 	*((int *)pixel) = color;
 }
-
-// int	draw_ray(t_info *info, t_ray *ray)
-// {
-// 	double	y;
-// 	double	x;
-// 	double	len;
-
-// 	if (ray->v_dist < ray->h_dist)
-// 		len = ray->v_dist;
-// 	else
-// 		len = ray->h_dist;
-// 	x = ray->x_pos;
-// 	y = ray->y_pos;
-// 	while (1)
-// 	{
-// 		x += cos(ray->angle);
-// 		y += sin(ray->angle);
-// 		if (fmod(x, 1) > 0.5) x = x / 1;
-// 		if (fmod(y, 1) > 0.5) y = y / 1;
-// 		if (sqrt(pow(x - ray->x_pos, 2) + pow(y - ray->y_pos, 2)) > len)
-// 		{
-// 			return (1);
-// 		}
-// 		set_pixel_color(&info->img, y, x, 0xFAF20A);
-// 	}
-// 	return (0);
-// }
-
-// int	drawa(t_info *info)
-// {
-// 	double	max_angle;
-// 	double	up_angle;
-
-// 	double	len;
-// 	double	wall_hieght;
-// 	max_angle = info->player.angle + (PI / 6);
-// 	up_angle = (FOV / WIN_WIDTH);
-// 	draw_img(info);
-// 	init_ray(&info->ray, info, max_angle - PI / 3, 1);
-// 	while (info->ray.angle <= max_angle)
-// 	{
-// 		if (info->ray.h_dist < info->ray.v_dist)
-// 			len = info->ray.h_dist;
-// 		else
-// 			len = info->ray.v_dist;
-// 		wall_hieght = (1 / len) * WIN_WIDTH;
-// 		if (fmod(wall_hieght, 1) > 0.5) wall_hieght += 1.5;
-// 		// printf("%f  %f\n", wall_hieght, len);
-// 		draw_ray(info, &info->ray);
-// 		info->ray.angle += 4 * up_angle;
-// 		init_ray(&info->ray, info, info->ray.angle + up_angle, 1);
-// 	}
-// 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
-// 	return 0;
-// }
 
 void	calcul_dist(t_info *info)
 {
@@ -157,23 +102,23 @@ void	fill_wall(t_info *info, int *start, int end, int x)
 	int	x_txt;
 	int	y_txt;
 	int	color;
-	t_img img;
+	t_textur *img;
 
 	x_txt = info->ray.h_dist % GRID_HIEGHT;printf("====%d\n", x_txt);
 	y_txt = 0;
 	double step = (double)(*start - end) / 60;
 	index_txt = face(info);
-	img.addr = mlx_get_data_addr(info->wall_imgs[index_txt], &img.bits_per_pixel,
-		&img.line_length, &img.endian);	
-	img.byts_per_pixel = img.bits_per_pixel / 8;
+	img = &info->textures[index_txt];	
 	int d = *start;
 	while (*start < end)
 	{
-		y_txt = (*start -d ) / step;
-		if (y_txt < 60)
-			color = (int)*(img.addr + y_txt * img.line_length + img.byts_per_pixel * x_txt); 
+		y_txt = fabs((*start -d) / step);
+
+		printf("%d %d  %p\n", y_txt, x_txt, img->addr + y_txt * img->length_line + (img->bits_per_pxl / 8) * x_txt);
+		if (y_txt < 64)
+			color = (int)*(img->addr + y_txt * img->length_line + (img->bits_per_pxl / 8) * x_txt); 
 		set_pixel_color(&info->img, *start, x, color);
-		if (y_txt > 60) y_txt = 0;
+		// if (y_txt > 63) y_txt = 0;
 		(*start)++;
 	}
 }
@@ -282,12 +227,6 @@ int	handle_key(int key, t_info *info)
 
 int	start_game(t_info *info)
 {
-	info->win = mlx_new_window(info->mlx, WIN_WIDTH, WIN_HIEGHT, "cub3D");
-	mlx_hook(info->win, 2, 1, handle_key, info);
-	info->img.img = mlx_new_image(info->mlx,  WIN_WIDTH, WIN_HIEGHT);
-	info->img.addr = mlx_get_data_addr(info->img.img, &info->img.bits_per_pixel,
-		&info->img.line_length, &info->img.endian);	
-	info->img.byts_per_pixel = info->img.bits_per_pixel / 8;
 	drawa(info);
 	handle_key(0, info);
 	mlx_loop(info->mlx);

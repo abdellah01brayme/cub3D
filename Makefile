@@ -8,7 +8,7 @@ LIB_DIR = libft
 LIBFT = $(LIB_DIR)/libft.a
 
 SRC = 	src/parser/check_map.c  src/parser/parser.c  src/parser/read_file.c  src/parser/parse_map.c src/parser/parse_elements.c\
-		src/tool/destroy.c src/tool/print_errors.c \
+		src/tool/destroy.c src/tool/print_errors.c src/tool/tools.c \
 		src/start_game/start_game.c src/start_game/draw_img.c src/start_game/draw.c\
 		src/main.c
 

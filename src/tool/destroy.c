@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:17:21 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/18 10:49:28 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:27:35 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,18 @@ void	free_map(char **map)
 void	destroy_info(t_info *info)
 {
 	free_map(info->map);
-	if (info->wall_imgs[NORTH])
-		mlx_destroy_image(info->mlx, info->wall_imgs[NORTH]);
-	if (info->wall_imgs[SOUTH])
-		mlx_destroy_image(info->mlx, info->wall_imgs[SOUTH]);
-	if (info->wall_imgs[WEST])
-		mlx_destroy_image(info->mlx, info->wall_imgs[WEST]);
-	if (info->wall_imgs[EAST])
-		mlx_destroy_image(info->mlx, info->wall_imgs[EAST]);
-	//....
-	if (info->win)
-		mlx_destroy_window(info->mlx, info->win);
+	if (info->textures[NORTH].img)
+		mlx_destroy_image(info->mlx, info->textures[NORTH].img);
+	if (info->textures[SOUTH].img)
+		mlx_destroy_image(info->mlx, info->textures[SOUTH].img);
+	if (info->textures[WEST].img)
+		mlx_destroy_image(info->mlx, info->textures[WEST].img);
+	if (info->textures[EAST].img)
+		mlx_destroy_image(info->mlx, info->textures[EAST].img);
 	if (info->img.img)
 		mlx_destroy_image(info->mlx, info->img.img);
+	if (info->win)
+		mlx_destroy_window(info->mlx, info->win);
 	mlx_destroy_display(info->mlx);
 	free(info->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/18 10:34:09 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:16:10 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static int	is_inserted(t_info *info)
 		return (print_error2("Element not inserted: ", "CEIL"));
 	if (info->color_floor < 0)
 		return (print_error2("Element not inserted: ", "FLOOR"));
-	if (!info->wall_imgs[NORTH])
+	if (!info->textures[NORTH].img)
 		return (print_error2("Element not inserted: ", "NORTH"));
-	if (!info->wall_imgs[SOUTH])
+	if (!info->textures[SOUTH].img)
 		return (print_error2("Element not inserted: ", "SOUTH"));
-	if (!info->wall_imgs[EAST])
+	if (!info->textures[EAST].img)
 		return (print_error2("Element not inserted: ", "EAST"));
-	if (!info->wall_imgs[WEST])
+	if (!info->textures[WEST].img)
 		return (print_error2("Element not inserted: ", "WEST"));
 	return (0);
 }
