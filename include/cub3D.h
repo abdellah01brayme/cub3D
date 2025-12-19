@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 17:34:31 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:29:12 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,9 @@ typedef struct s_dda
 
 typedef struct s_player
 {
-	int		x_pos;
-	int		y_pos;
+	double	x_pos;
+	double	y_pos;
 	double	dir_angle;
-	int		y_step;
-	int		x_step;
 	int		fov;
 }			t_player;
 
@@ -101,18 +99,6 @@ typedef struct s_textur
 	int		endian;
 }			t_textur;
 
-// typedef struct s_map
-// {
-// 	void		*mlx;
-// 	void		*win;
-// 	char		**map;
-// 	t_player	player;
-// 	t_textur	img;
-// 	t_textur	textures[4];
-// 	int			color_floor;
-// 	int			color_ceil;
-// }				t_map;
-
 typedef struct s_map
 {
 	void		*mlx;
@@ -123,10 +109,6 @@ typedef struct s_map
 	t_textur	textures[4];
 	int			color_floor;
 	int			color_ceil;
-	int			height;//
-	int			length;//
-
-
 	int			screen_width;
 	int			screen_height;
 }				t_map;
@@ -156,7 +138,6 @@ void	free_map(char **map);
 void	destroy_info(t_map *info);
 int		parse_element(t_map *info, char *file, size_t *offset, int type);
 int		parse_element(t_map *info, char *file, size_t *offset, int type);
-void	set_pixel_color(t_textur *param, int y, int x, int color);
 int		initial_info(t_map *info);
 int		initial_other(t_map *info);
 
