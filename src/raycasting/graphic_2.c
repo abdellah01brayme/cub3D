@@ -70,10 +70,9 @@ int	handle_key(int key, t_map *map)
 	if (key == 115)
 		move_forward_backward(map, -speed);
 	if (key == 97)
-		strafe(map, speed);
-	if (key == 100)
 		strafe(map, -speed);
-	clear_image(map);
+	if (key == 100)
+		strafe(map, speed);
 	raycasting_loop(map);
 	mlx_put_image_to_window(map->mlx, map->win, map->img.img, 0, 0);
 	return (0);

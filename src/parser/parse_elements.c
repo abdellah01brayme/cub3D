@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:21:43 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 17:30:32 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:55:13 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,17 @@ static int	parse_texture(t_map *info, char *file, size_t *offset, int type)
 	path = file + *offset;
 	while (file[*offset] && file[*offset] != '\n')
 		(*offset)++;
-	i  = *offset - 1;
+	i = *offset - 1;
 	while (file[i] == ' ')
 		file[i--] = '\0';
 	file[*offset] = '\0';
 	(*offset)++;
 	textur->img = mlx_xpm_file_to_image(info->mlx, path, &textur->textur_width,
-										&textur->textur_height);
-	if (!textur->img) // && info->wall_width[type] != 0 if the texture is empty
+			&textur->textur_height);
+	if (!textur->img)
 		return (print_error2("Invalide texture: ", path - 3));
 	textur->addr = mlx_get_data_addr(textur->img, &textur->bits_per_pxl,
-									&textur->length_line, &textur->endian);
+			&textur->length_line, &textur->endian);
 	return (0);
 }
 

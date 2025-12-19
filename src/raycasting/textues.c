@@ -31,14 +31,14 @@ int	calcul_position_texture(t_dda *dda, t_map *map, t_textur *tex)
 	else
 		wall_x = map->player.x_pos + dda->perp_wall_dist * dda->ray_dir_x;
 	wall_x -= floor(wall_x);
-	tex_x = (int)(wall_x * tex->length_line);
+	tex_x = (int)(wall_x * tex->textur_width);
 	if (dda->side == 0 && dda->ray_dir_x > 0)
-		tex_x = tex->length_line - tex_x - 1;
+		tex_x = tex->textur_width - tex_x - 1;
 	if (dda->side == 1 && dda->ray_dir_y < 0)
-		tex_x = tex->length_line - tex_x - 1;
+		tex_x = tex->textur_width - tex_x - 1;
 	if (tex_x < 0)
 		tex_x = 0;
-	if (tex_x >= tex->length_line)
-		tex_x = tex->length_line - 1;
+	if (tex_x >= tex->textur_width)
+		tex_x = tex->textur_width - 1;
 	return (tex_x);
 }

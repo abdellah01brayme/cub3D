@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 17:51:53 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:59:27 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,18 @@ static void	set_player(t_map *info, int y, int x)
 	info->player.y_pos = y + 0.5;
 	if (info->map[y][x] == 'N')
 	{
-		// info->player.y_step = -1;
 		info->player.dir_angle = 3.0 * M_PI / 2.0;
 	}
 	else if (info->map[y][x] == 'E')
 	{
-		// info->player.x_step = 1;
 		info->player.dir_angle = 0.0;
 	}
 	else if (info->map[y][x] == 'S')
 	{
-		// info->player.y_step = 1;
 		info->player.dir_angle = M_PI / 2.0;
 	}
 	else
 	{
-		// info->player.x_step = -1;
 		info->player.dir_angle = M_PI;
 	}
 }

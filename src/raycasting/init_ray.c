@@ -41,21 +41,3 @@ void	init_dda(t_map *map, t_dda *dda)
 		dda->delta_dist_y = fabs(1 / dda->ray_dir_y);
 	init_step_and_side_dist(map, dda);
 }
-
-void	clear_image(t_map *map)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < map->screen_height)
-	{
-		x = 0;
-		while (x < map->screen_width)
-		{
-			put_pixel(map, x, y, 0x000000);
-			x++;
-		}
-		y++;
-	}
-}

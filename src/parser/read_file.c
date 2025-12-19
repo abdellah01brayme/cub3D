@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:36:24 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/18 10:35:37 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:56:34 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*read_file(char *map_path)
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 	{
-		print_error2(strerror(errno), map_path);// print error: print_error3(map_path, strerror(errno), map_path);
+		print_error2(strerror(errno), map_path);
 		close(fd);
 		exit(1);
 	}

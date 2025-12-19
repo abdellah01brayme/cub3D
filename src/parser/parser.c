@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:29:01 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 18:12:37 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:59:42 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	parser(t_map *info, char *file_name)
 {
 	size_t	offset;
 	int		type;
-	char 	*file;
+	char	*file;
 
 	file = read_file(file_name);
 	offset = 0;
