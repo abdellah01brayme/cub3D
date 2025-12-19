@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:29:01 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/18 13:57:03 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:12:37 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_type(char *s, size_t i)
 	return (-1);
 }
 
-int	parser(t_info *info, char *file_name)
+int	parser(t_map *info, char *file_name)
 {
 	size_t	offset;
 	int		type;
@@ -48,8 +48,8 @@ int	parser(t_info *info, char *file_name)
 			++offset;
 		else if (type < 0)
 		{
-			free(file);
 			print_error3("unacceptable element: ", file + offset, "\n");
+			free(file);
 			return (1);
 		}
 		else if (parse_element(info, file, &offset, type))

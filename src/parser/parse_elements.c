@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:21:43 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 11:14:54 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 17:30:32 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	parse_color(int *color, char *file, size_t *offset)
 	return (*color);
 }
 
-static int	parse_texture(t_info *info, char *file, size_t *offset, int type)
+static int	parse_texture(t_map *info, char *file, size_t *offset, int type)
 {
 	t_textur	*textur;
 	char		*path;
@@ -85,7 +85,7 @@ static int	parse_texture(t_info *info, char *file, size_t *offset, int type)
 	return (0);
 }
 
-int	parse_element(t_info *info, char *file, size_t *offset, int type)
+int	parse_element(t_map *info, char *file, size_t *offset, int type)
 {
 	if (type == FLOOR)
 	{

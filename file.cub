@@ -1,7 +1,7 @@
-NO ./textures/nourth.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
+NO ./textures/imag1_64.xpm
+SO ./textures/imag2_64.xpm
+WE ./textures/imag3_64.xpm
+EA ./textures/imag4_64.xpm
 
 F 210,00,023
 C 220,100,255
@@ -14,7 +14,7 @@ C 220,100,255
 1000000000001
 1000000000001
 1100000000001
-10000   00000001
+1000000000001
 1000010000001
 1000001010001
 1000010000101

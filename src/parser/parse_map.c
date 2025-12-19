@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 11:16:10 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 17:51:53 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	first_check_map(char *s, size_t *offset)
 	return (0);
 }
 
-static int	is_inserted(t_info *info)
+static int	is_inserted(t_map *info)
 {
 	if (info->color_ceil < 0)
 		return (print_error2("Element not inserted: ", "CEIL"));
@@ -57,35 +57,33 @@ static int	is_inserted(t_info *info)
 	return (0);
 }
 
-static void	set_player(t_info *info, int y, int x)
+static void	set_player(t_map *info, int y, int x)
 {
-	info->player.x_pos = x * GRID_WIDTH + GRID_WIDTH / 2;
-	info->player.y_pos = y * GRID_HIEGHT + GRID_HIEGHT / 2;
-	info->player.x_step = 0;
-	info->player.y_step = 0;
+	info->player.x_pos = x + 0.5;
+	info->player.y_pos = y + 0.5;
 	if (info->map[y][x] == 'N')
 	{
-		info->player.y_step = -1;
-		info->player.angle = 3 * PI / 2;
+		// info->player.y_step = -1;
+		info->player.dir_angle = 3.0 * M_PI / 2.0;
 	}
 	else if (info->map[y][x] == 'E')
 	{
-		info->player.x_step = 1;
-		info->player.angle = 0;
+		// info->player.x_step = 1;
+		info->player.dir_angle = 0.0;
 	}
 	else if (info->map[y][x] == 'S')
 	{
-		info->player.y_step = 1;
-		info->player.angle = PI / 2;
+		// info->player.y_step = 1;
+		info->player.dir_angle = M_PI / 2.0;
 	}
 	else
 	{
-		info->player.x_step = -1;
-		info->player.angle = PI;
+		// info->player.x_step = -1;
+		info->player.dir_angle = M_PI;
 	}
 }
 
-static void	find_player(t_info *info)
+static void	find_player(t_map *info)
 {
 	int	y;
 	int	x;
@@ -108,7 +106,7 @@ static void	find_player(t_info *info)
 	}
 }
 
-int	parse_map(t_info *info, char *file, size_t *offset)
+int	parse_map(t_map *info, char *file, size_t *offset)
 {
 	size_t	i;
 

@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:17:21 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 11:27:35 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/19 17:29:55 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	destroy_info(t_info *info)
+void	destroy_info(t_map *info)
 {
 	free_map(info->map);
 	if (info->textures[NORTH].img)
