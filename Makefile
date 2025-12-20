@@ -2,15 +2,16 @@ CC = cc
 
 NAME = cub3D
 
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror
+
 LIB_DIR = libft
 
 LIBFT = $(LIB_DIR)/libft.a
 
-SRC = 	src/parser/check_map.c  src/parser/parser.c  src/parser/read_file.c  src/parser/parse_map.c src/parser/parse_elements.c\
+SRC = 	src/parser/check_map.c src/parser/parser.c src/parser/read_file.c src/parser/parse_map.c src/parser/parse_elements.c\
 		src/tool/destroy.c src/tool/print_errors.c src/tool/tools.c \
-		src/raycasting/graphic_2.c src/raycasting/graphic.c src/raycasting/init_ray.c src/raycasting/raycasting.c src/raycasting/textues.c\
-		src/raycasting/textur_2.c\
+		src/raycasting/graphic_2.c src/raycasting/graphic.c src/raycasting/init_ray.c src/raycasting/raycasting.c\
+		src/raycasting/textues.c src/raycasting/textur_2.c\
 		src/main.c
 
 DIR = ./minilibx-linux

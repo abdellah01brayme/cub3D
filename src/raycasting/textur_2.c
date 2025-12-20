@@ -1,7 +1,6 @@
 
 #include "../../include/cub3D.h"
 
-
 /* ========== FONCTION 2: Calculer les dimensions du mur ========== */
 
 static void	init_render_data(t_map *map, t_dda *dda, t_textur *tex, t_render *r)

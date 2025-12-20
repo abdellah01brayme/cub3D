@@ -71,7 +71,7 @@ int	raycasting_loop(t_map *map)
 		find_wall(&dda, map);
 		dda.perp_wall_dist = calc_perp_dist(&dda);
 		dda.perp_wall_dist = correct_distance(&dda, map);
-		if (dda.perp_wall_dist <= 0)
+		if (dda.perp_wall_dist <= 0.0002)
 			dda.perp_wall_dist = 0.0001;
 		tex_id = select_texture(&dda);
 		tex = &map->textures[tex_id];
