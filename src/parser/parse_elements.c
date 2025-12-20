@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:21:43 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/20 12:08:47 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 15:37:53 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	get_rgb_number(char *file, size_t *offset)
 	int		rgb;
 
 	rgb = 0;
+	if (!ft_isdigit(file[*offset]))
+		return (-1);
 	while (ft_isdigit(file[*offset]))
 	{
 		rgb = rgb * 10 + file[*offset] - '0';
@@ -44,9 +46,9 @@ static int	parse_color(int *color, char *file, size_t *offset)
 		if (n[i] < 0)
 			return (print_error3("Invalid RGB range: ", line, "\n"));
 		skip_space(file, offset);
-		if ((i < 2 && file[*offset] != ',') || (i > 1 && file[*offset] == ','))
+		if ((i < 2 && file[*offset] != ','))
 			return (print_error3("Invalid RGB format: ", line, "\n"));
-		if (file[*offset] == ',')
+		if (i < 2 && file[*offset] == ',')
 			(*offset)++;
 		i++;
 	}

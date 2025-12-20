@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/20 11:28:07 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 15:53:12 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 # include <string.h>
 # include <math.h>
 
-
-typedef enum s_num
+typedef enum s_typ
 {
 	NORTH = 0,
 	SOUTH,
@@ -34,7 +33,7 @@ typedef enum s_num
 	MAP,
 	NEW_LINE,
 	INVALIDE
-}	t_num;
+}	t_type;
 
 typedef struct s_render
 {
@@ -102,20 +101,6 @@ typedef struct s_map
 	int			screen_height;
 }				t_map;
 
-void	render_column_textured(int x, t_map *map, t_dda *dda, t_textur *tex);
-int		creat_window(t_map *map);
-int		raycasting_loop(t_map *map);
-int	calcul_position_texture(t_dda *dda, t_map *map, t_textur *tex);
-int	select_texture(t_dda *dda);
-void	clear_image(t_map *map);
-void	init_dda(t_map *map, t_dda *dda);
-int	calcul_position_texture(t_dda *dda, t_map *map, t_textur *tex);
-int	select_texture(t_dda *dda);
-int	handle_key(int key, t_map *map);
-void	put_pixel(t_map *map, int x, int y, int color);
-void	cleanup_and_exit(t_map *map);
-
-
 int		parser(t_map *info, char *file);
 int		print_error(char *msg1);
 int		print_error2(char *msg1, char *msg2);
@@ -129,9 +114,19 @@ int		parse_element(t_map *info, char *file, size_t *offset, int type);
 int		parse_element(t_map *info, char *file, size_t *offset, int type);
 int		initial_info(t_map *info);
 int		initial_other(t_map *info);
-
-
 int		len_map(char **map);
 int		handle_key(int key, t_map *info);
 void	skip_space(char *str, size_t *offset);
+void	render_column_textured(int x, t_map *map, t_dda *dda, t_textur *tex);
+int		creat_window(t_map *map);
+int		raycasting_loop(t_map *map);
+int		calcul_position_texture(t_dda *dda, t_map *map, t_textur *tex);
+int		select_texture(t_dda *dda);
+void	init_dda(t_map *map, t_dda *dda);
+int		calcul_position_texture(t_dda *dda, t_map *map, t_textur *tex);
+int		select_texture(t_dda *dda);
+int		handle_key(int key, t_map *map);
+void	put_pixel(t_map *map, int x, int y, int color);
+void	cleanup_and_exit(t_map *map);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/20 11:14:58 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 15:43:21 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	is_inserted(t_map *info)
 	return (0);
 }
 
-static void	set_player(t_map *info, int y, int x)
+static void	init_player(t_map *info, int y, int x)
 {
 	info->player.x_pos = x + 0.5;
 	info->player.y_pos = y + 0.5;
@@ -92,7 +92,7 @@ static void	find_player(t_map *info)
 		{
 			if (ft_strchr("NSWE", info->map[y][x]))
 			{
-				set_player(info, y, x);
+				init_player(info, y, x);
 				info->map[y][x] = '0';
 				break ;
 			}

@@ -6,13 +6,13 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:29:01 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/20 11:38:42 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 15:28:13 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static t_num	get_type(char *s, size_t i)
+static t_type	get_type(char *s, size_t i)
 {
 	if (s[i] == '\n')
 		return (NEW_LINE);
@@ -28,7 +28,7 @@ static t_num	get_type(char *s, size_t i)
 		return (CEIL);
 	if (s[i] == 'F')
 		return (FLOOR);
-	if (ft_strchr(" 10NSEW", s[i]))
+	if (ft_strchr(" 10", s[i]))
 		return (MAP);
 	return (INVALIDE);
 }
@@ -36,7 +36,7 @@ static t_num	get_type(char *s, size_t i)
 int	parser(t_map *info, char *file_name)
 {
 	size_t	offset;
-	t_num	type;
+	t_type	type;
 	char	*file;
 
 	file = read_file(file_name);

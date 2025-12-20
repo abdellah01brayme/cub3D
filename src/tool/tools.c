@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 10:03:50 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 19:05:07 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 15:21:55 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	initial_other(t_map *info)
 	mlx_hook(info->win, 17, 0, close_wind, info);
 	info->img.img = mlx_new_image(info->mlx, info->screen_width,
 			info->screen_height);
-	if (!info->win)
+	if (!info->img.img)
 		return (print_error("Create image failed"));
 	info->img.addr = mlx_get_data_addr(info->img.img, &info->img.bits_per_pxl,
 			&info->img.length_line, &info->img.endian);
