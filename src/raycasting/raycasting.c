@@ -32,7 +32,7 @@ static void	find_wall(t_dda *dda, t_map *map)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		if (map->map[dda->map_y][dda->map_x] == '1')//check
+		if (map->map[dda->map_y][dda->map_x] == '1')
 			dda->hit = 1;
 	}
 }
@@ -44,14 +44,14 @@ static double	calc_perp_dist(t_dda *dda)
 	return (dda->side_dist_y - dda->delta_dist_y);
 }
 
-static double correct_distance(t_dda *dda, t_map *map)
+static double	correct_distance(t_dda *dda, t_map *map)
 {
-	double new_dis;
-	double corect;
+	double	new_dis;
+	double	corect;
 
 	corect = map->player.dir_angle - dda->ray_angle;
 	new_dis = dda->perp_wall_dist * cos(corect);
-	return(new_dis);
+	return (new_dis);
 }
 
 int	raycasting_loop(t_map *map)

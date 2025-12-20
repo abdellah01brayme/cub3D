@@ -6,13 +6,13 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:29:01 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 18:59:42 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 11:38:42 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static int	get_type(char *s, size_t i)
+static t_num	get_type(char *s, size_t i)
 {
 	if (s[i] == '\n')
 		return (NEW_LINE);
@@ -30,13 +30,13 @@ static int	get_type(char *s, size_t i)
 		return (FLOOR);
 	if (ft_strchr(" 10NSEW", s[i]))
 		return (MAP);
-	return (-1);
+	return (INVALIDE);
 }
 
 int	parser(t_map *info, char *file_name)
 {
 	size_t	offset;
-	int		type;
+	t_num	type;
 	char	*file;
 
 	file = read_file(file_name);
@@ -46,7 +46,7 @@ int	parser(t_map *info, char *file_name)
 		type = get_type(file, offset);
 		if (type == NEW_LINE)
 			++offset;
-		else if (type < 0)
+		else if (type == INVALIDE)
 		{
 			print_error3("unacceptable element: ", file + offset, "\n");
 			free(file);

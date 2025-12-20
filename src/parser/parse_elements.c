@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:21:43 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 18:55:13 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 12:08:47 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	parse_color(int *color, char *file, size_t *offset)
 		if (n[i] < 0)
 			return (print_error3("Invalid RGB range: ", line, "\n"));
 		skip_space(file, offset);
-		if (i < 2 && file[*offset] != ',')
+		if ((i < 2 && file[*offset] != ',') || (i > 1 && file[*offset] == ','))
 			return (print_error3("Invalid RGB format: ", line, "\n"));
 		if (file[*offset] == ',')
 			(*offset)++;
@@ -79,7 +79,7 @@ static int	parse_texture(t_map *info, char *file, size_t *offset, int type)
 	textur->img = mlx_xpm_file_to_image(info->mlx, path, &textur->textur_width,
 			&textur->textur_height);
 	if (!textur->img)
-		return (print_error2("Invalide texture: ", path - 3));
+		return (print_error2("can't load texture: ", path));
 	textur->addr = mlx_get_data_addr(textur->img, &textur->bits_per_pxl,
 			&textur->length_line, &textur->endian);
 	return (0);
@@ -103,13 +103,13 @@ int	parse_element(t_map *info, char *file, size_t *offset, int type)
 	}
 	else if (type == NORTH || type == SOUTH || type == WEST || type == EAST)
 	{
+		if (info->textures[type].img)
+			return (print_error2("duplication of element: ", "TEXTURE"));
 		if (parse_texture(info, file, offset, type))
 			return (1);
 	}
 	else if (type == MAP)
-	{
 		if (parse_map(info, file, offset))
 			return (1);
-	}
 	return (0);
 }

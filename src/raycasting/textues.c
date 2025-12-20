@@ -1,7 +1,6 @@
 
 #include "../../include/cub3D.h"
 
-
 int	select_texture(t_dda *dda)
 {
 	if (dda->side == 0)

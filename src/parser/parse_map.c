@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 11:30:46 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 18:59:27 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 11:14:58 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	first_check_map(char *s, size_t *offset)
 			line = s + *offset + 1;
 		if (!ft_strchr(" 01\nNSWE", s[*offset]))
 		{
-			print_error3("Invalid MAP charater in this line: ", line, "\n");
+			print_error3("Invalid MAP character in this line: ", line, "\n");
 			return (-1);
 		}
 		if (ft_strchr("NSWE", s[*offset]))

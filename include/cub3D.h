@@ -6,7 +6,7 @@
 /*   By: aid-bray <aid-bray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:34:56 by aid-bray          #+#    #+#             */
-/*   Updated: 2025/12/19 18:35:47 by aid-bray         ###   ########.fr       */
+/*   Updated: 2025/12/20 11:28:07 by aid-bray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 # include <math.h>
 
 
-#include <stdio.h>
-
-
 typedef enum s_num
 {
 	NORTH = 0,
@@ -35,7 +32,8 @@ typedef enum s_num
 	CEIL,
 	FLOOR,
 	MAP,
-	NEW_LINE
+	NEW_LINE,
+	INVALIDE
 }	t_num;
 
 typedef struct s_render
